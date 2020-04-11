@@ -39,7 +39,7 @@ header {
     outline: none;
     border: none;
     display: inline-block;
-    padding: 5px 10px;
+    padding: 5px 12px;
     background: var(--buttoncolor);
     color: var(--buttontext);
     position: relative;
@@ -67,7 +67,18 @@ header {
   }
 
   .quiz-title {
+      text-align: center;
       font-size: 1.3em;
+  }
+
+  .quiz-intro {
+      text-align: center;
+      width: 50%;
+      margin: auto;
+  }
+
+  .quiz-intro .btn {
+      margin-top: 10px;
   }
 
   .quiz-body {
@@ -96,4 +107,5 @@ header {
       font-style: italic;
       border-top: 2px solid gray;
       padding-top: 10px;
+      opacity: 0;
   }
