@@ -109,3 +109,16 @@ header {
       padding-top: 10px;
       opacity: 0;
   }
+
+  /* Add CSS for Scoreboard */
+
+  .scoreboard h2 {
+      text-decoration: underline;
+      padding-bottom: 2px;
+  }
+
+  .scorebox {
+      border: 2px dotted gray;
+      padding: 10px;
+      margin-bottom: 5px;
+  }
