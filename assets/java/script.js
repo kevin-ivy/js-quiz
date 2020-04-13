@@ -7,9 +7,13 @@ var returnPage = document.querySelector('#intro-page');
 var introPage = document.getElementById("intro-page").innerHTML;
 var startQuiz = document.querySelector('#start-quiz');
 var timeLeft = document.querySelector('#countdown');
+var quizQuestion = document.querySelector('.question');
+var quizChoices = document.querySelector('.answers');
+var questionIndex = 0;
 var timer = 0;
 var viewingScores = false;
 var takingQuiz = false;
+var currentAnswers = [];
 
 //Store quiz questions and answers
 var quiz = [
@@ -25,6 +29,46 @@ function beginQuiz() {
     var hideIntroEl = document.querySelector("#intro-page");
         hideIntroEl.className = "quiz-intro";
         hideIntroEl.innerHTML = "";
+        currentChoices = quiz[0].c;
+        currentAnswer = quiz[0].a;
+        quizQuestion.textContent = quiz[0].q;
+
+        for (i =0; i < 4; i++) {
+            var newButtonEl = document.createElement('button');
+            newButtonEl.className = 'btn answer-item';
+            newButtonEl.id = 'choice' + i;
+            newButtonEl.setAttribute('value', currentChoices[i]);
+            newButtonEl.setAttribute('onclick', 'checkAnswer(this, currentAnswer)');
+            newButtonEl.textContent = currentChoices[i];
+            quizChoices.appendChild(newButtonEl);
+        }
+};
+
+function checkAnswer(btn) {
+    var choiceMade = btn.value;
+    if (choiceMade === currentAnswer) {
+        score++;
+    } else {
+        timer -= 15;
+    }
+    if (questionIndex < 4) {
+        questionIndex++;
+        loadNextQuestion();
+    } else {
+        showResults();
+    }
+};
+
+function loadNextQuestion() {
+    currentAnswer = quiz[questionIndex].a;
+    currentChoices = quiz[questionIndex].c;
+    quizQuestion.textContent = quiz[questionIndex].q;
+
+    for (i =0; i < 4; i++) {
+        var button = document.getElementById('choice' + i);
+        button.setAttribute('value', currentChoices[i]);
+        button.textContent = currentChoices[i];
+    }
 };
 
 //View High Scores
@@ -61,6 +105,7 @@ function showHighScore() {
         var clearButtonEl = document.createElement('button');
         clearButtonEl.textContent = 'Clear Scores';
         clearButtonEl.className = 'btn';
+        clearButtonEl.style.marginLeft = "10px";
         clearButtonEl.id = 'clear-btn';
         displayScore.appendChild(clearButtonEl);
 };
@@ -100,6 +145,12 @@ function outOfTime() {
 
 //Show the results and let the player input their initials
 function showResults() {
+    var quizQuestion = document.querySelector('.question');
+    var quizChoices = document.querySelector('.answers');
+
+    quizQuestion.innerHTML = '';
+    quizChoices.innerHTML = '';
+
     var resultsScreen = document.querySelector('#intro-page')
     resultsScreen.className = "quiz-intro results";
     resultsScreen.innerHTML = "<h2>You scored " + score + "</h2>"
@@ -124,7 +175,7 @@ function showResults() {
     submitScore.appendChild(nameInput);
 
     var submitDiv = document.createElement('div');
-    submitDiv.style.paddingTop = "10px";
+    submitDiv.style.marginTop = "20px";
     resultsScreen.appendChild(submitDiv);
 
     var submitBtn = document.createElement('btn');
@@ -184,13 +235,22 @@ function buttonClickHandler(event) {
     }
     else if (targetEl.matches('#start-quiz')) {
         takingQuiz = true;
-        timer = 2;
+        timer = 60;
         quizTimer();
         beginQuiz();
     }
     else if (targetEl.matches('.submit-score')) {
         submitHighScore();
     }
+    else if (targetEl.matches('#clear-btn')) {
+        if (highScores.length === 0) {
+            return false;
+        }
+        highScores = [];
+        localStorage.clear();
+        returnToTitle();
+    }
+    //else if (targetEl.matches'#)
 };
 
 loadScores();

@@ -38,7 +38,6 @@ header {
 .btn {
     outline: none;
     border: none;
-    display: inline-block;
     padding: 5px 12px;
     background: var(--buttoncolor);
     color: var(--buttontext);
@@ -88,18 +87,22 @@ header {
 
   .question {
       padding: 5px 0;
+      font-size: 1.5em;
       font-style: italic;
       text-align: justify;
   }
 
-  .answer-list {
-    padding: 0;
+  .answers {
+    padding: 10px;
     list-style: none;
-    text-align: justify;
+    position: relative;
   }
 
   .answer-item {
-      padding: 5px 0;
+      font-size:  1.25em;
+      margin: 12px auto;
+      display: block;
+      width: 500px;
   }
 
   .feedback {
