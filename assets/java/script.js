@@ -27,6 +27,7 @@ var quiz = [
 //Launch Quiz
 function beginQuiz() {
     var hideIntroEl = document.querySelector("#intro-page");
+        questionIndex = 0;
         hideIntroEl.className = "quiz-intro";
         hideIntroEl.innerHTML = "";
         currentChoices = quiz[0].c;
@@ -49,7 +50,7 @@ function checkAnswer(btn) {
     if (choiceMade === currentAnswer) {
         score++;
     } else {
-        timer -= 15;
+        timer = Math.max(0, timer - 15);
     }
     if (questionIndex < 4) {
         questionIndex++;
@@ -128,9 +129,9 @@ returnPage.addEventListener("click", function(event){
 function quizTimer () {
     var timeInterval = setInterval(function () {
         timeLeft.textContent = timer;
-        timer--;
+        timer = Math.max(0, timer - 1);
 
-        if (timer === 0) {
+        if (timer < 1) {
             timeLeft.textContent = 0;
             clearInterval(timeInterval);
             outOfTime();
