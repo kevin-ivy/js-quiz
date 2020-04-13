@@ -72,13 +72,14 @@ header {
   }
 
   .quiz-intro {
+      padding-top: 4px;
       text-align: center;
       width: 50%;
       margin: auto;
   }
 
   .quiz-intro .btn {
-      margin-top: 10px;
+      margin-top: 14px;
   }
 
   .quiz-body {
@@ -108,6 +109,7 @@ header {
       border-top: 2px solid gray;
       padding-top: 10px;
       opacity: 0;
+      transition: 0.25s;
   }
 
   /* Add CSS for Scoreboard */
@@ -117,8 +119,25 @@ header {
       padding-bottom: 2px;
   }
 
+  .results {
+      width: 70%;
+      padding-bottom: 10px;
+  }
+
   .scorebox {
-      border: 2px dotted gray;
+      margin: auto;
       padding: 10px;
       margin-bottom: 5px;
+      font-size: 1.15em;
+      text-align: center;
+  }
+
+  .submit-name {
+      display: flex;
+      justify-content: space-evenly;
+      align-items: justify;
+  }
+  
+  .submit-score {
+      font-size: .8em;
   }
